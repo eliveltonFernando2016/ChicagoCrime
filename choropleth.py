@@ -8,16 +8,17 @@ geo_json_data = json.load(open('chicagoCity.json'))
 
 teste = geo_json_data['features']
 
-m = folium.Map([41.679280604, -87.610128133], zoom_start=8)
+m = folium.Map([41.679280604, -87.610128133], zoom_start=10)
 folium.GeoJson(geo_json_data).add_to(m)
 
 percent = []
 total = 0
+
 for i in ward['quantidade']:
     total = total+i
 
 for i in ward['quantidade']:
-    percent.append(i/total)
+    percent.append(float(i)/total)
 
 ward['percent'] = percent
 
@@ -31,7 +32,7 @@ m.choropleth(
     fill_color='BuGn',
     fill_opacity=0.8,
     line_opacity=0.5,
-    legend_name='Crimes por àrea(%)',
+    legend_name='Crimes por area(%)',
     threshold_scale=bins,
     highlight = True
 )
